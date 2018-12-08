@@ -6,10 +6,11 @@ const client = redis.createClient()
 
 class Controller  {
 
-    static async getAllUseRedis(req, res) {
+    static getAllUseRedis(req, res) {
         client.get('movies-and-tv', (err, response) => {
             if(err) {
-                res.status(500).json(err); throw err
+                res.status(500).json(err);
+                throw err;
             }
             if(response) {
                 res.status(200).json(JSON.parse(response));
@@ -47,7 +48,7 @@ class Controller  {
         console.log(req.body)
         axios({
             method: 'POST',
-            url: `${movieEndpoint}+/movies`,
+            url: `${movieEndpoint}/movies`,
             data: {
                 title: req.body.title,
                 overview: req.body.overview,
@@ -58,7 +59,7 @@ class Controller  {
         })
         .then(({data}) => {
             console.log(data, '===DTAAA=====')
-            this.getAll()
+            Controller.getAll()
             res.status(201).json(data)
         })
         .catch(err => {
@@ -80,7 +81,7 @@ class Controller  {
             }
         })
         .then(({data}) => {
-            this.getAll()
+            Controller.getAll()
             res.status(201).json(data)
         })
         .catch(err => {

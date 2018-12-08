@@ -1,8 +1,9 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const indexRoute = require('./Router')
 const cors = require('cors')
-
+const port = process.env.PORT || 3002
 const app = express()
 mongoose
     .connect('mongodb://localhost/tv-series', {
@@ -26,6 +27,6 @@ app.use('/', indexRoute)
 
 
 
-app.listen(3002, () => {
-    console.log('TV Series Server started')
+app.listen(port, () => {
+    console.log('TV Series Server started on port', port)
 })
