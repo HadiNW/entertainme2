@@ -6,8 +6,10 @@ const cors = require('cors')
 const port = process.env.PORT || 3001
 
 const app = express()
+
+const mongodUri = `mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@ds229474.mlab.com:29474/movies`
 mongoose
-    .connect('mongodb://localhost/movies', {
+    .connect(mongodUri, {
          useNewUrlParser: true
     })
     .then(() => {

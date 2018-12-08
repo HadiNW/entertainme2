@@ -5,8 +5,10 @@ const indexRoute = require('./Router')
 const cors = require('cors')
 const port = process.env.PORT || 3002
 const app = express()
+
+const mongodUri = `mongodb://${process.env.MLAB_USERNAME}:${process.env.MLAB_PASSWORD}@ds129454.mlab.com:29454/tv`
 mongoose
-    .connect('mongodb://localhost/tv-series', {
+    .connect(mongodUri, {
          useNewUrlParser: true
     })
     .then(() => {
@@ -21,7 +23,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 
 app.use('/', indexRoute)
-
 
 
 
